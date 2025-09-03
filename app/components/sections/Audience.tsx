@@ -195,13 +195,13 @@ export default function Audience({ data }: AudienceProps) {
         )}
       </div>
       {/* Core Personas */}
-      {analysis?.corePersonas && analysis.corePersonas.length > 0 ? (
+      {analysis?.audience?.corePersonas && analysis.audience.corePersonas.length > 0 ? (
         <div className="card p-8">
           <h2 className="text-2xl font-bold text-brand-dark mb-6">Core Personas</h2>
           
           {/* Persona Navigation */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-            {analysis.corePersonas.map((persona, index) => (
+            {analysis.audience.corePersonas.map((persona, index) => (
               <button
                 key={index}
                 onClick={() => setSelectedPersona(index)}
@@ -226,7 +226,7 @@ export default function Audience({ data }: AudienceProps) {
           </div>
 
           {/* Selected Persona Details */}
-          {analysis.corePersonas[selectedPersona] && (
+          {analysis.audience?.corePersonas?.[selectedPersona] && (
             <motion.div
               key={selectedPersona}
               initial={{ opacity: 0, x: 20 }}
@@ -242,38 +242,38 @@ export default function Audience({ data }: AudienceProps) {
                       <UserCheck className="w-8 h-8 text-brand-accent" />
                       <div>
                         <h3 className="text-xl font-bold text-brand-dark">
-                          {getPersonaData(analysis.corePersonas[selectedPersona], 'name', `Persona ${selectedPersona + 1}`)}
+                          {getPersonaData(analysis.audience?.corePersonas?.[selectedPersona], 'name', `Persona ${selectedPersona + 1}`)}
                         </h3>
-                        <p className="text-gray-600">{getPersonaData(analysis.corePersonas[selectedPersona], 'title')}</p>
-                        {analysis.corePersonas[selectedPersona]?.percentage && (
+                        <p className="text-gray-600">{getPersonaData(analysis.audience?.corePersonas?.[selectedPersona], 'title')}</p>
+                        {analysis.audience?.corePersonas?.[selectedPersona]?.percentage && (
                           <div className="flex items-center space-x-2 mt-1">
                             <span className="px-3 py-1 bg-brand-accent/10 text-brand-accent rounded-full text-sm font-medium">
-                              {renderMetricValue(analysis.corePersonas[selectedPersona].percentage)} of customer base
+                              {renderMetricValue(analysis.audience?.corePersonas?.[selectedPersona]?.percentage)} of customer base
                             </span>
                           </div>
                         )}
                       </div>
                     </div>
                     <p className="text-gray-700 mb-6 leading-relaxed">
-                      {getPersonaData(analysis.corePersonas[selectedPersona], 'description', 'Detailed persona description not available')}
+                      {getPersonaData(analysis.audience?.corePersonas?.[selectedPersona], 'description', 'Detailed persona description not available')}
                     </p>
                     
                     <div className="space-y-4">
                       <div className="flex items-center space-x-2">
                         <Calendar className="w-4 h-4 text-gray-400" />
-                        <span className="text-sm text-gray-600">{getPersonaData(analysis.corePersonas[selectedPersona], 'age')}</span>
+                        <span className="text-sm text-gray-600">{getPersonaData(analysis.audience?.corePersonas?.[selectedPersona], 'age')}</span>
                       </div>
                       <div className="flex items-center space-x-2">
                         <MapPin className="w-4 h-4 text-gray-400" />
-                        <span className="text-sm text-gray-600">{getPersonaData(analysis.corePersonas[selectedPersona], 'demographics.location')}</span>
+                        <span className="text-sm text-gray-600">{getPersonaData(analysis.audience?.corePersonas?.[selectedPersona], 'demographics.location')}</span>
                       </div>
                       <div className="flex items-center space-x-2">
                         <TrendingUp className="w-4 h-4 text-gray-400" />
-                        <span className="text-sm text-gray-600">{getPersonaData(analysis.corePersonas[selectedPersona], 'demographics.income')}</span>
+                        <span className="text-sm text-gray-600">{getPersonaData(analysis.audience?.corePersonas?.[selectedPersona], 'demographics.income')}</span>
                       </div>
                       <div className="flex items-center space-x-2">
                         <Heart className="w-4 h-4 text-gray-400" />
-                        <span className="text-sm text-gray-600">{getPersonaData(analysis.corePersonas[selectedPersona], 'demographics.familyStatus')}</span>
+                        <span className="text-sm text-gray-600">{getPersonaData(analysis.audience?.corePersonas?.[selectedPersona], 'demographics.familyStatus')}</span>
                       </div>
                     </div>
                   </div>
@@ -284,22 +284,22 @@ export default function Audience({ data }: AudienceProps) {
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="bg-white rounded-lg p-6 shadow-sm">
                       <h4 className="font-semibold text-brand-dark mb-3">Core Values</h4>
-                      {renderList(analysis.corePersonas[selectedPersona]?.psychographics?.values)}
+                      {renderList(analysis.audience?.corePersonas?.[selectedPersona]?.psychographics?.values)}
                     </div>
                     <div className="bg-white rounded-lg p-6 shadow-sm">
                       <h4 className="font-semibold text-brand-dark mb-3">Key Interests</h4>
-                      {renderList(analysis.corePersonas[selectedPersona]?.psychographics?.interests)}
+                      {renderList(analysis.audience?.corePersonas?.[selectedPersona]?.psychographics?.interests)}
                     </div>
                   </div>
 
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="bg-white rounded-lg p-6 shadow-sm">
                       <h4 className="font-semibold text-brand-dark mb-3">Needs & Motivations</h4>
-                      {renderList(analysis.corePersonas[selectedPersona]?.needs, "text-green-700")}
+                      {renderList(analysis.audience?.corePersonas?.[selectedPersona]?.needs, "text-green-700")}
                     </div>
                     <div className="bg-white rounded-lg p-6 shadow-sm">
                       <h4 className="font-semibold text-brand-dark mb-3">Pain Points</h4>
-                      {renderList(analysis.corePersonas[selectedPersona]?.painPoints, "text-red-700")}
+                      {renderList(analysis.audience?.corePersonas?.[selectedPersona]?.painPoints, "text-red-700")}
                     </div>
                   </div>
 
@@ -309,12 +309,12 @@ export default function Audience({ data }: AudienceProps) {
                       <div>
                         <p className="text-sm font-medium text-gray-600 mb-2">Platforms:</p>
                         <div className="flex flex-wrap gap-2">
-                          {(analysis.corePersonas[selectedPersona]?.mediaConsumption?.platforms || []).map((platform, idx) => (
+                          {(analysis.audience?.corePersonas?.[selectedPersona]?.mediaConsumption?.platforms || []).map((platform, idx) => (
                             <span key={idx} className="px-3 py-1 bg-brand-accent/10 text-brand-accent rounded-full text-xs">
                               {platform}
                             </span>
                           ))}
-                          {(!analysis.corePersonas[selectedPersona]?.mediaConsumption?.platforms || analysis.corePersonas[selectedPersona]?.mediaConsumption?.platforms.length === 0) && (
+                          {(!analysis.audience?.corePersonas?.[selectedPersona]?.mediaConsumption?.platforms || analysis.audience?.corePersonas?.[selectedPersona]?.mediaConsumption?.platforms?.length === 0) && (
                             <span className="text-gray-500 text-sm">No platform data available</span>
                           )}
                         </div>
@@ -322,12 +322,12 @@ export default function Audience({ data }: AudienceProps) {
                       <div>
                         <p className="text-sm font-medium text-gray-600 mb-2">Content Types:</p>
                         <div className="flex flex-wrap gap-2">
-                          {(analysis.corePersonas[selectedPersona]?.mediaConsumption?.content || []).map((content, idx) => (
+                          {(analysis.audience?.corePersonas?.[selectedPersona]?.mediaConsumption?.content || []).map((content, idx) => (
                             <span key={idx} className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs">
                               {content}
                             </span>
                           ))}
-                          {(!analysis.corePersonas[selectedPersona]?.mediaConsumption?.content || analysis.corePersonas[selectedPersona]?.mediaConsumption?.content.length === 0) && (
+                          {(!analysis.audience?.corePersonas?.[selectedPersona]?.mediaConsumption?.content || analysis.audience?.corePersonas?.[selectedPersona]?.mediaConsumption?.content?.length === 0) && (
                             <span className="text-gray-500 text-sm">No content data available</span>
                           )}
                         </div>
@@ -340,11 +340,11 @@ export default function Audience({ data }: AudienceProps) {
                     <div className="space-y-3">
                       <div>
                         <p className="text-sm font-medium text-gray-600">Current Perception:</p>
-                        <p className="text-gray-700">{getPersonaData(analysis.corePersonas[selectedPersona], 'brandRelationship.currentPerception')}</p>
+                        <p className="text-gray-700">{getPersonaData(analysis.audience?.corePersonas?.[selectedPersona], 'brandRelationship.currentPerception')}</p>
                       </div>
                       <div>
                         <p className="text-sm font-medium text-gray-600">Desired Relationship:</p>
-                        <p className="text-gray-700">{getPersonaData(analysis.corePersonas[selectedPersona], 'brandRelationship.desiredRelationship')}</p>
+                        <p className="text-gray-700">{getPersonaData(analysis.audience?.corePersonas?.[selectedPersona], 'brandRelationship.desiredRelationship')}</p>
                       </div>
                     </div>
                   </div>

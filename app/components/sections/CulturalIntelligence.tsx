@@ -161,7 +161,7 @@ export default function CulturalIntelligence({ data }: CulturalIntelligenceProps
                       ))}
                     </div>
                   ) : (
-                    <p className="text-sm text-gray-700">{value}</p>
+                    <p className="text-sm text-gray-700">{String(value)}</p>
                   )}
                 </div>
               )
@@ -202,7 +202,7 @@ export default function CulturalIntelligence({ data }: CulturalIntelligenceProps
                       ))}
                     </div>
                   ) : (
-                    <p className="text-sm text-gray-700">{value}</p>
+                    <p className="text-sm text-gray-700">{String(value)}</p>
                   )}
                 </div>
               )

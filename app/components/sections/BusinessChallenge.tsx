@@ -133,11 +133,6 @@ export default function BusinessChallenge({ data }: BusinessChallengeProps) {
             <h3 className="font-semibold text-brand-dark mb-3">Community Overview</h3>
             <p className="text-lg text-gray-700">Deep analysis of the Emily in Paris fandom community, exploring fan personas, behavior patterns, and engagement dynamics to understand how Vaseline can authentically connect with this passionate audience.</p>
           </div>
-        ) : analysis?.commercialObjective ? (
-          <div className="bg-gradient-to-r from-brand-accent/10 to-brand-light border-l-4 border-brand-accent p-6 rounded-r-xl mb-8">
-            <h3 className="font-semibold text-brand-dark mb-3">Commercial Objective</h3>
-            <p className="text-lg text-gray-700">{formatAllCitations(analysis.commercialObjective)}</p>
-          </div>
         ) : (
           <div className="bg-gradient-to-r from-brand-accent/10 to-brand-light border-l-4 border-brand-accent p-6 rounded-r-xl mb-8">
             <h3 className="font-semibold text-brand-dark mb-3">Analysis Context</h3>

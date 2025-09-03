@@ -3,7 +3,8 @@ import { getBigQueryService } from '../../../lib/bigquery'
 import OpenAI from 'openai'
 
 // Export maxDuration for this API route (Next.js 14 way to extend timeout)
-export const maxDuration = 7200 // 2 hours (7200 seconds)
+// Note: Vercel hobby plan limits serverless functions to 300 seconds (5 minutes)
+export const maxDuration = 300 // 5 minutes (300 seconds) - Vercel hobby plan limit
 
 interface AnalysisRequest {
   website: string

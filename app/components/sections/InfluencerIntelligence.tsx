@@ -101,6 +101,13 @@ const InfluencerIntelligence: React.FC<InfluencerIntelligenceProps> = ({ data })
   const influencerData = data.structuredAnalysis?.influencerIntelligence
   const [selectedRegion, setSelectedRegion] = useState<string>('All')
   
+  // Debug logging
+  console.log('InfluencerIntelligence - Full data:', data)
+  console.log('InfluencerIntelligence - structuredAnalysis:', data.structuredAnalysis)
+  console.log('InfluencerIntelligence - influencerData:', influencerData)
+  console.log('InfluencerIntelligence - organicFandomCreators:', influencerData?.organicFandomCreators)
+  console.log('InfluencerIntelligence - byRegion:', influencerData?.organicFandomCreators?.byRegion)
+  
   if (!influencerData) {
     return (
       <div className="max-w-7xl mx-auto p-6">

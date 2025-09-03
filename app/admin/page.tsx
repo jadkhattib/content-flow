@@ -1156,6 +1156,10 @@ export default function AdminApp() {
       if (result.success) {
         // Handle regular automated analysis response
         setAnalysisData(result.data)
+        
+        // IMPORTANT: Save the real analysis data to session storage immediately
+        sessionStorage.setItem('discoveryFlowAnalysis', JSON.stringify(result.data))
+        
         setShowDashboard(true)
         toast.success('🎉 OpenAI Deep Research analysis complete! Advanced insights ready.', { 
           id: loadingToast,

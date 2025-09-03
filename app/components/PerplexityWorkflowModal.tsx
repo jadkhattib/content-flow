@@ -93,6 +93,11 @@ export default function PerplexityWorkflowModal({
         const data = await response.json()
         setProcessingComplete(true)
         
+        // IMPORTANT: Save the real analysis data to session storage immediately
+        if (data.success && data.data) {
+          sessionStorage.setItem('discoveryFlowAnalysis', JSON.stringify(data.data))
+        }
+        
         // Show success message with BigQuery status
         const bigQueryStatus = data.bigqueryId ? 'and saved to BigQuery' : '(BigQuery not configured)'
         alert(`✅ Analysis completed ${bigQueryStatus}!\n\nRedirecting to dashboard...`)
@@ -105,8 +110,8 @@ export default function PerplexityWorkflowModal({
         // Close modal after a brief delay to show success
         setTimeout(() => {
           onClose()
-          // Reload the page to show the new results
-          window.location.reload()
+          // Navigate to analysis dashboard instead of reloading
+          window.location.href = '/analysis/strategic-overview'
         }, 2000)
       } else {
         const errorData = await response.json()

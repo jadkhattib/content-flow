@@ -101,6 +101,113 @@ const InfluencerIntelligence: React.FC<InfluencerIntelligenceProps> = ({ data })
   const influencerData = data.structuredAnalysis?.influencerIntelligence
   const [selectedRegion, setSelectedRegion] = useState<string>('All')
   
+  // Enhanced debugging to understand the data flow
+  console.log('=== INFLUENCER INTELLIGENCE DEBUG ===')
+  console.log('1. Full data object:', data)
+  console.log('2. Has structuredAnalysis?', !!data.structuredAnalysis)
+  console.log('3. Has influencerIntelligence?', !!data.structuredAnalysis?.influencerIntelligence)
+  console.log('4. influencerData:', influencerData)
+  console.log('5. organicFandomCreators:', influencerData?.organicFandomCreators)
+  console.log('6. byRegion:', influencerData?.organicFandomCreators?.byRegion)
+  
+  if (influencerData?.organicFandomCreators?.byRegion) {
+    console.log('7. Available regions:', Object.keys(influencerData.organicFandomCreators.byRegion))
+    Object.entries(influencerData.organicFandomCreators.byRegion).forEach(([region, regionData]) => {
+      console.log(`8. ${region} data:`, regionData)
+      console.log(`9. ${region} microInfluencers:`, regionData.microInfluencers?.length || 0)
+      console.log(`10. ${region} nanoInfluencers:`, regionData.nanoInfluencers?.length || 0)
+    })
+  }
+  
+  // Also check session storage directly
+  if (typeof window !== 'undefined') {
+    const sessionData = sessionStorage.getItem('discoveryFlowAnalysis')
+    console.log('11. Session storage raw data:', sessionData ? 'exists' : 'missing')
+    if (sessionData) {
+      try {
+        const parsed = JSON.parse(sessionData)
+        console.log('12. Session parsed influencer data:', parsed.structuredAnalysis?.influencerIntelligence)
+      } catch (e) {
+        console.log('12. Session parse error:', e)
+      }
+    }
+  }
+  console.log('=== END DEBUG ===\n')
+  
+  // TEMPORARY: Create a test function to inject real data
+  const injectRealData = () => {
+    const realData = {
+      brandName: "Emily in Paris",
+      structuredAnalysis: {
+        influencerIntelligence: {
+          organicFandomCreators: {
+            byRegion: {
+              "Spain": {
+                microInfluencers: [{
+                  name: "@spain_micro1",
+                  platform: "Instagram", 
+                  followers: "120k",
+                  engagement: "5.4%",
+                  fandomConnection: "Passionate Spain fan who posts Emily-inspired looks and content regularly",
+                  contentStyle: "Polished aesthetic with emphasis on fashion and beauty",
+                  beautyFocus: "50%",
+                  audienceDemographics: "Primarily Spain females 18-30 interested in fashion",
+                  recentEIPContent: "Recreated Emily's iconic coat from S3",
+                  lipOilAlignment: "Natural fit given regular lip care tips content",
+                  contentQuality: "High (professional editing and photography)",
+                  brandSafety: "Clean, family-friendly content",
+                  collaborationPotential: "High (frequently collaborates with beauty brands)",
+                  contactInfo: "email@contact.com",
+                  regionalRelevance: "Popular within Spain fan communities"
+                }],
+                nanoInfluencers: [{
+                  name: "@spain_nano1",
+                  platform: "TikTok",
+                  followers: "15k", 
+                  engagement: "9%",
+                  uniqueAngle: "Combines Emily in Paris fashion with local trends",
+                  fandomRole: "Relatable fan with strong community interaction",
+                  viralPotential: "Medium (has trending content style)",
+                  lipOilOpportunity: "Often uses lip products, good for authentic promos",
+                  regionalRelevance: "Active among Spain Gen Z fans"
+                }]
+              },
+              "Netherlands": {
+                microInfluencers: [{
+                  name: "@netherlands_micro1",
+                  platform: "Instagram",
+                  followers: "100k",
+                  engagement: "6%",
+                  fandomConnection: "Dutch fan sharing Emily-inspired style and beauty content",
+                  contentStyle: "Clean minimalist visuals with stylish edits",
+                  beautyFocus: "40%",
+                  audienceDemographics: "Primarily Netherlands females 18-35 into fashion",
+                  recentEIPContent: "Styled Emily-inspired outfit video",
+                  lipOilAlignment: "Often features lip products, fits natural aesthetic",
+                  contentQuality: "High (slick photography and editing)",
+                  brandSafety: "Positive, family-friendly messaging",
+                  collaborationPotential: "Medium (collabs with local beauty brands)",
+                  contactInfo: "dm@creator.com",
+                  regionalRelevance: "Well-known in Netherlands EIP community"
+                }]
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    sessionStorage.setItem('discoveryFlowAnalysis', JSON.stringify(realData))
+    console.log('Real data injected! Refresh page to see changes.')
+    window.location.reload()
+  }
+  
+  // Add a global function for testing
+  if (typeof window !== 'undefined') {
+    (window as any).injectRealInfluencerData = injectRealData
+    console.log('🚀 Run injectRealInfluencerData() in console to test with real data')
+  }
+  
   if (!influencerData) {
     return (
       <div className="max-w-7xl mx-auto p-6">
